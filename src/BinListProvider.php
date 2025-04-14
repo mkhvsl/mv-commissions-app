@@ -12,11 +12,8 @@ class BinListProvider implements BinProviderInterface {
             }
 
             $data = json_decode($response);
-            if (!isset($data->country->alpha2)) {
-                throw new \Exception("Country code not found in BIN response.");
-            }
 
-            return $data->country->alpha2;
+            return $data->country->alpha2 ?? '';
         } catch (\Throwable $e) {
             throw new \Exception("BIN lookup failed: " . $e->getMessage());
         }
